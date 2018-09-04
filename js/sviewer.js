@@ -380,7 +380,7 @@ var SViewer = function() {
                     options.format = $(this).find("FormatList  > Format[current='1']").text();
                     options.sldurl = ($(this).find("StyleList  > Style[current='1'] > SLD > OnlineResource").attr('xlink:href'));
                     options.stylename = $(this).find("StyleList  > Style[current='1'] > Name").text();
-                    options.opacity = parseFloat($(this).find("opacity").text());
+                    options.opacity = parseFloat($(this).find("opacity, Extension > ol\\:opacity").text());
                     var l = new LayerQueryable(options);
                     config.layersQueryable.push(l);
                     map.addLayer(l.wmslayer);
