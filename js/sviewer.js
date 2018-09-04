@@ -79,9 +79,9 @@ var SViewer = function() {
 
             self.options.namespace = (self.options.nslayername.indexOf(":")>0) ? self.options.nslayername.split(':',2)[0]:''; // namespace
             self.options.layername = (self.options.nslayername.indexOf(':')>0) ? self.options.nslayername.split(':',2)[1]:''; // layername
-            self.options.wmsurl_global = config.geOrchestraBaseUrl + '/geoserver/wms'; // global getcap
-            self.options.wmsurl_ns = config.geOrchestraBaseUrl + '/geoserver/' + self.options.namespace + '/wms'; // virtual getcap namespace
-            self.options.wmsurl_layer = config.geOrchestraBaseUrl + '/geoserver/' + self.options.namespace + '/' + self.options.layername + '/wms'; // virtual getcap layer
+            self.options.wmsurl_global = config.geOrchestraBaseUrl + '/wxs/wms'; // global getcap
+            self.options.wmsurl_ns = config.geOrchestraBaseUrl + '/wxs/' + self.options.namespace + '/wms'; // virtual getcap namespace
+            self.options.wmsurl_layer = config.geOrchestraBaseUrl + '/wxs/' + self.options.namespace + '/' + self.options.layername + '/wms'; // virtual getcap layer
         }
 
         /**
@@ -401,7 +401,7 @@ var SViewer = function() {
 
         // wmc comes from a geOrchestra map id
         if (wmc.match(wmc.match(/^[a-z\d]{32}$/))) {
-            url = config.geOrchestraBaseUrl + 'mapfishapp/ws/wmc/geodoc' + wmc + '.wmc';
+            url = config.geOrchestraBaseUrl + 'carto/ws/wmc/geodoc' + wmc + '.wmc';
         }
         // wmc is an url
         else {
@@ -471,7 +471,7 @@ var SViewer = function() {
                     name + '</a>'
                 );
             });
-            $('#georchestraForm').attr('action', config.geOrchestraBaseUrl + 'mapfishapp/');
+            $('#georchestraForm').attr('action', config.geOrchestraBaseUrl + 'carto/');
             if ($('#qrcode').css("visibility")==="visible") {
                 $('#qrcode').empty();
                 new QRCode("qrcode", {
