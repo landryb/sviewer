@@ -389,7 +389,7 @@ var SViewer = function() {
                     options.sldurl = ($(this).find("StyleList  > Style[current='1'] > SLD > OnlineResource").attr('xlink:href'));
                     options.stylename = $(this).find("StyleList  > Style[current='1'] > Name").text();
                     options.opacity = parseFloat($(this).find("opacity, Extension > ol\\:opacity").text());
-                    options.singletile = ($(this).find("Extension  > singleTile").text().toLowerCase()==="true");
+                    options.singletile = ($(this).find("singleTile, Extension > ol\\:singleTile").text().toLowerCase()==="true");
                     var l = new LayerQueryable(options);
                     config.layersQueryable.push(l);
                     map.addLayer(l.wmslayer);
