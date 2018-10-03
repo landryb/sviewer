@@ -57,6 +57,7 @@ var SViewer = function() {
             wmsurl_layer: '',
             sldurl: null,
             format: 'image/png',
+            singletile: 'false',
             opacity: 1
         };
         this.md = {
@@ -104,11 +105,18 @@ var SViewer = function() {
             if (self.options.sldurl) {
                 wms_params.params.SLD = self.options.sldurl;
             }
-            self.wmslayer = new ol.layer.Tile({
-                opacity: isNaN(self.options.opacity)?1:self.options.opacity,
-                source: new ol.source.TileWMS(wms_params)
-            });
-        }
+            if( self.options.singletile ) {
+                self.wmslayer = new ol.layer.Image({
+                    opacity: isNaN(self.options.opacity)?1:self.options.opacity,
+                    source: new ol.source.ImageWMS(wms_params)
+                });
+            } else {
+                self.wmslayer = new ol.layer.Tile({
+                    opacity: isNaN(self.options.opacity)?1:self.options.opacity,
+                    source: new ol.source.TileWMS(wms_params)
+                });
+            }
+        };
 
         /**
          * Queries the layer capabilities to display its legend and metadata
@@ -381,6 +389,7 @@ var SViewer = function() {
                     options.sldurl = ($(this).find("StyleList  > Style[current='1'] > SLD > OnlineResource").attr('xlink:href'));
                     options.stylename = $(this).find("StyleList  > Style[current='1'] > Name").text();
                     options.opacity = parseFloat($(this).find("opacity, Extension > ol\\:opacity").text());
+                    options.singletile = ($(this).find("Extension  > singleTile").text().toLowerCase()==="true");
                     var l = new LayerQueryable(options);
                     config.layersQueryable.push(l);
                     map.addLayer(l.wmslayer);
